@@ -2,7 +2,7 @@
 
 import requests
 import json
-import time
+from time import ctime
 
 class surf_bot:
 
@@ -110,7 +110,7 @@ class surf_bot:
 
         # Print the time of the chart
         print
-        print "Time of chart: %s" % time.ctime(int(data1['localTimestamp']))
+        print "Time of chart: %s" % ctime(int(data1['localTimestamp']))
 
         print
         print "*" * 55
