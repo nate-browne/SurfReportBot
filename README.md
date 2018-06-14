@@ -11,7 +11,7 @@ your mates from the lineup.
 
 Unfortunately, I can't always be out there to surf every great swell, but I
 still like keeping up with swell patterns to be able to see what I'm missing and
-maybe get a session in later that day.
+to see if it'd be worth trying to get a session in later that day.
 
 This project uses the MagicSeaweed API to get the current surf report and report
 it to me to assist with those mind surf sessions that happen when I'm sitting at
@@ -28,8 +28,8 @@ after you do that, go ahead and put it __*by itself*__ in a file called
 script will handle the rest :)
 
 ### Credits
-Shoutout to MagicSeaweed for providing this sick API for using. You guys are the
+Cheers to MagicSeaweed for providing this sick API for using. You are the
 best!
 
-Want more things in the forecast? Feel free to submit an issue and I'll look
+Want more information in the forecast? Feel free to submit an issue and I'll look
 into adding it!
