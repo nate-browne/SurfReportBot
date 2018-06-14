@@ -33,3 +33,5 @@ best!
 
 Want more information in the forecast? Feel free to submit an issue and I'll look
 into adding it!
+
+![alt text](https://im-1-uk.msw.ms/msw_powered_by.png)
