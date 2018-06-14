@@ -24,8 +24,9 @@ use. That's it. Really, that's it.
 ...sort of. You'll need to get your own API key from the dudes over at
 [MagicSeaweed](https://magicseaweed.com/developer/terms-and-conditions), but
 after you do that, go ahead and put it __*by itself*__ in a file called
-`.secret`. Make sure that that file is in the same directory as this script. The
-script will handle the rest :)
+`.secret`. Make sure that that file is in the same directory as this script, as
+well as in any directory that you'll call this script from (so if it's in your
+.rc files, your `~` directory). The script will handle the rest :)
 
 ### Credits
 Cheers to MagicSeaweed for providing this sick API for using. You are the
