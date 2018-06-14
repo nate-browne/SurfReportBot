@@ -2,6 +2,7 @@
 
 ### Bringing the Surf Report to a Terminal Near You
 
+![alt text](https://bodyboard-holidays.com/wp-content/uploads/photo-gallery/imports//Indonesia%20Waves/scar_barrel.jpg)
 
 #### Intro
 I love the beach. There's really nothing like the feeling of dropping in,
@@ -20,6 +21,15 @@ my desk.
 To get started, just run this script from your .bashrc/.zshrc/whatever shell you
 use. That's it. Really, that's it.
 
+...sort of. You'll need to get your own API key from the dudes over at
+[MagicSeaweed](https://magicseaweed.com/developer/terms-and-conditions), but
+after you do that, go ahead and put it __*by itself*__ in a file called
+`.secret`. Make sure that that file is in the same directory as this script. The
+script will handle the rest :)
+
 ### Credits
 Shoutout to MagicSeaweed for providing this sick API for using. You guys are the
 best!
+
+Want more things in the forecast? Feel free to submit an issue and I'll look
+into adding it!
