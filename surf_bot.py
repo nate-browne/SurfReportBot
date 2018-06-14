@@ -85,7 +85,6 @@ class surf_bot:
         print "Swell height: %d ft (min), %d ft (max) in a %s direction." % (min_height, max_height, direction)
         print "Primary component: %s direction with a period of %d." % (prim_dir, prim_per)
         print "Secondary component: %s direction with a period of %d." % (sec_dir, sec_per)
-        print
 
     """
     Extracts the wind information and prints it out to the screen
