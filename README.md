@@ -1,10 +1,10 @@
 # SurfReportBot
 
-### Bringing the Surf Report to a Terminal Near You
+## Bringing the Surf Report to a Terminal Near You
 
 ![alt text](https://bodyboard-holidays.com/wp-content/uploads/photo-gallery/imports//Indonesia%20Waves/scar_barrel.jpg)
 
-#### Intro
+### Intro
 I love the beach. There's really nothing like the feeling of dropping in,
 stalling a bit, getting tubed, then flying out of the barrel to the cheers of
 your mates from the lineup.
