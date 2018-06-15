@@ -2,7 +2,7 @@
 
 import requests
 import json
-from time import ctime
+from time import localtime, strftime
 
 class surf_bot:
 
@@ -11,7 +11,7 @@ class surf_bot:
     newport = 4683
 
     """
-    Constructor. Gets the api key and url for usage in other files
+    Constructor. Gets the api key and sets the url for usage
     """
     def __init__(self):
 
@@ -28,7 +28,7 @@ class surf_bot:
 
     """
     Grabs the raw JSON data for parsing
-    return: the JSON data parsed for la jolla and newport beach
+    return: the JSON data parsed for la jolla and newport beach as two lists
     """
     def grab_data(self):
 
@@ -45,11 +45,11 @@ class surf_bot:
         newport_data = request2.json()
 
         # Filter so the return is only the first item in the list
-        return lajolla_data[:1], newport_data[:1]
+        return lajolla_data, newport_data
 
     """
     Extracts the rating information and prints it out to the screen
-    params: data1 - JSON surf data to parse
+    params: data - JSON surf data to parse
     """
     def get_rating(self, data):
 
@@ -64,7 +64,7 @@ class surf_bot:
 
     """
     Extracts the swell information and prints it out to the screen
-    params: data1 - JSON surf data to parse
+    params: data - JSON surf data to parse
     """
     def get_swell(self, data):
 
@@ -83,22 +83,22 @@ class surf_bot:
 
         # print results
         print "Swell height: %d ft (min), %d ft (max) in a %s direction." % (min_height, max_height, direction)
-        print "Primary component: %s direction with a period of %d." % (prim_dir, prim_per)
-        print "Secondary component: %s direction with a period of %d." % (sec_dir, sec_per)
+        print "Primary component: %s direction with a swell period of %d." % (prim_dir, prim_per)
+        print "Secondary component: %s direction with a swell period of %d." % (sec_dir, sec_per)
 
     """
     Extracts the wind information and prints it out to the screen
-    params: data1 - JSON surf data to parse
+    params: data - JSON surf data to parse
     """
     def get_wind(self, data):
 
         # Grab wind speed and direction (both compass and degrees)
-        speed = data['wind']['speed']
-        direction = data['wind']['direction']
-        compass = data['wind']['compassDirection']
+        spd = data['wind']['speed']
+        drc = data['wind']['direction']
+        comp = data['wind']['compassDirection']
 
         # print results
-        print "Wind info: %d mph in a %d (%s) direction." % (speed, direction, compass)
+        print "Wind info: %d mph in a %d (%s) direction." % (spd, drc, comp)
         print
 
     """
@@ -108,14 +108,15 @@ class surf_bot:
     """
     def print_results(self, data1, data2):
 
-        # Print the time of the chart
-        print
-        print "Time of chart: %s" % ctime(int(data1['localTimestamp']))
-
         print
         print "*" * 55
         print "Horseshoe Beach (Hospitals)"
         print "*" * 55
+        print
+
+        # Print the time of the chart
+        timestr = localtime(int(data1['issueTimestamp']))
+        print "Time of chart: %s" % strftime("%a %d %b %Y at %H:%M:%S", timestr)
         print
 
         # Get information for La Jolla
@@ -126,6 +127,11 @@ class surf_bot:
         print "*" * 55
         print "36th Street Newport Beach"
         print "*" * 55
+        print
+
+        # Print the time of the chart
+        timestr = localtime(int(data2['issueTimestamp']))
+        print "Time of chart: %s" % strftime("%a %d %b %Y at %H:%M:%S", timestr)
         print
 
         # Get information for Newport Beach
