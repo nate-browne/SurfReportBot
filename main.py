@@ -1,19 +1,26 @@
 #!/usr/local/bin/python2
+# Author: Nate Browne
+# Version: 1.0
+# Date: 15 Jun 2018
+# File: main.py
+# This is the main program driver for the surf bot. It uses the surf bot class
+# to grab the data, then cleans it up before using the surf bot to output the
+# relevant surf data
 
+# Imports
 import surf_bot as sb
 import pprint
-from datetime import datetime
-from time import ctime, time
-from sys import argv
-
+from datetime import datetime, timedelta
+from time import ctime
+from sys import argv, exit
 
 def main():
 
+    loc_str = 'localTimestamp'
+    api_str = "http://magicseaweed.com/api/%s/forecast/?spot_id=%d&units=uk"
+
     # Set debug boolean
     debug = False
-
-    # Create a surf bot object
-    bot = sb.surf_bot()
 
     # Enable debug mode
     if len(argv) > 1 and argv[1] == '-x':
@@ -21,60 +28,64 @@ def main():
         pp = pprint.PrettyPrinter(indent=1)
         debug = True
 
+    # Create a surf bot object
+    bot = sb.surf_bot(api_str, debug)
+
     print
 
     # Get the current day of the week
     curr_date = datetime.now()
     today = curr_date.strftime("%a")
 
-    # Get the current UNIX time
-    curr_time = int(time())
-
-    # Print the current UNIX time if in debug mode
-    if debug == True:
-        print curr_time
-
     # Prompt you to see if you want the report. Helps so that you don't have to
     # see it if you don't want to
     res = raw_input("Do you want the current surf data? (y)es or (n)o: ")
+    print
 
     if res.upper() == "Y" or res.upper() == "YES":
 
+        # Make API call to grab JSON surf data
         json1, json2 = bot.grab_data()
 
-        # Get a list of today's surf charts for both locations
-        d1 = [obj for obj in json1 if today in ctime(int(obj['localTimestamp']))]
-        d2 = [obj for obj in json2 if today in ctime(int(obj['localTimestamp']))]
+        # Verify that we got something back
+        if json1 == None or json2 == None:
 
-        # Parse the most recently published chart
-        r1 = d1[0]
-        for chrt in d1:
+            print "Exiting..."
+            exit(1)
 
-            diff = abs(curr_time - int(chrt['timestamp']))
-            curr_diff = abs(curr_time - int(r1['timestamp']))
+        # Get the reports for today
+        loc1 = [obj for obj in json1 if today in ctime(obj[loc_str])]
+        loc2 = [obj for obj in json2 if today in ctime(obj[loc_str])]
 
-            if debug == True:
-                print diff, curr_diff
+        # Grab first chart in json object as a preliminary step
+        r1 = loc1[0]
 
-            if diff < curr_diff:
+        # Get the most recent chart (to the current time)
+        for chrt in loc1:
+
+            # Create timedelta objects by subtracting timestamps
+            res = abs(curr_date - datetime.fromtimestamp(chrt[loc_str]))
+            prev = abs(curr_date - datetime.fromtimestamp(r1[loc_str]))
+
+            # Smaller # of seconds == closer to current time
+            if res.total_seconds() < prev.total_seconds():
+
                 r1 = chrt
 
-        # Parse the most recently published chart
-        r2 = d2[0]
-        for chrt in d2:
+        # Grab first chart in json object as a preliminary step
+        r2 = loc2[0]
 
-            diff = abs(curr_time - int(chrt['timestamp']))
-            curr_diff = abs(curr_time - int(r2['timestamp']))
+        # Get the most recent chart (to the current time)
+        for chrt in loc2:
 
-            if debug == True:
-                print diff, curr_diff
+            # Create timedelta objects by subtracting timestamps
+            res = abs(curr_date - datetime.fromtimestamp(chrt[loc_str]))
+            prev = abs(curr_date - datetime.fromtimestamp(r2[loc_str]))
 
-            if diff < curr_diff:
+            # Smaller # of seconds == closer to current time
+            if res.total_seconds() < prev.total_seconds():
+
                 r2 = chrt
-
-        # Print the times and the most recent chart JSON if debug is on
-        if debug == True:
-            print curr_time, r1['timestamp'], r2['timestamp']
 
         # All good, let's get the surf report!
         bot.print_results(r1, r2)
@@ -84,5 +95,6 @@ def main():
         print "Okay, maybe next time!"
         print
 
+# Standard Boilerplate Code to run main()
 if __name__ == '__main__':
     main()
