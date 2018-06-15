@@ -53,7 +53,8 @@ def main():
             diff = abs(curr_time - int(chrt['timestamp']))
             curr_diff = abs(curr_time - int(r1['timestamp']))
 
-            print diff, curr_diff
+            if debug == True:
+                print diff, curr_diff
 
             if diff < curr_diff:
                 r1 = chrt
@@ -64,6 +65,9 @@ def main():
 
             diff = abs(curr_time - int(chrt['timestamp']))
             curr_diff = abs(curr_time - int(r2['timestamp']))
+
+            if debug == True:
+                print diff, curr_diff
 
             if diff < curr_diff:
                 r2 = chrt
