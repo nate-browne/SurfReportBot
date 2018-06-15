@@ -74,7 +74,7 @@ def main():
 
         # Print the times and the most recent chart JSON if debug is on
         if debug == True:
-            print curr_time, r1['timestamp']
+            print curr_time, r1['timestamp'], r2['timestamp']
 
         # All good, let's get the surf report!
         bot.print_results(r1, r2)
