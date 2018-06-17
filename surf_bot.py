@@ -11,6 +11,7 @@
 import requests
 import json
 from time import localtime, strftime
+import os
 
 class surf_bot:
 
@@ -37,7 +38,7 @@ class surf_bot:
     def __init__(self, apistr, debug):
 
         # get the secret key
-        with open(".secret", 'r') as inputfile:
+        with open(os.path.expanduser("~/.secret"), 'r') as inputfile:
 
             # Read in the API key
             temp = inputfile.readline()
