@@ -1,7 +1,8 @@
 #!/usr/local/bin/python2
 # Author: Nate Browne
-# Version: 1.0
+# Version: 1.5
 # Date: 15 Jun 2018
+# Last Edited: 17 Jun 2018
 # File: main.py
 # This is the main program driver for the surf bot. It uses the surf bot class
 # to grab the data, then cleans it up before using the surf bot to output the

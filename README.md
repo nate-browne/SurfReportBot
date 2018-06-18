@@ -28,7 +28,7 @@ after you do that, go ahead and put it __*by itself*__ in a file called
 well as in any directory that you'll call this script from (so if it's in your
 .rc files, your `~` directory). The script will handle the rest :)~~
 
-UPDATE: As of version 1.5, you only need a .secret in your home directory! Yay!
+**UPDATE**: As of version 1.5, you only need a `.secret` in your home directory! Yay!
 :)
 
 ### Credits

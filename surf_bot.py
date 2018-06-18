@@ -1,7 +1,8 @@
 #!/usr/local/bin/python2
 # Author: Nate Browne
-# Version: 1.0
+# Version: 1.5
 # Date: 15 Jun 2018
+# Last Edited: 17 Jun 2018
 # File: surf_bot.py
 # This file contains the surf bot class which has the capability to make API
 # calls, read in the API key, and parse the relevant data from the extracted
