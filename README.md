@@ -24,9 +24,13 @@ use. That's it. Really, that's it.
 ...sort of. You'll need to get your own API key from the dudes over at
 [MagicSeaweed](https://magicseaweed.com/developer/terms-and-conditions), but
 after you do that, go ahead and put it __*by itself*__ in a file called
-`.secret`. ~~Make sure that that file is in the same directory as this script, as
-well as in any directory that you'll call this script from (so if it's in your
-.rc files, your `~` directory). The script will handle the rest :)~~
+`.secret`. Make sure that you have python 2 installed, along with the `requests`
+module. If you don't have the latter, use the command `pip install requests` to
+handle that. Lastly, make sure to change the first line of both scripts to be
+`#!/usr/bin/env python` instead of the current `#!/usr/local/bin/python2`!
+~~Make sure that that file is in the same directory as this script, as well as
+in any directory that you'll call this script from (so if it's in your .rc files,
+your `~` directory). The script will handle the rest :)~~
 
 **UPDATE**: As of version 1.5, you only need a `.secret` in your home directory! Yay!
 :)
