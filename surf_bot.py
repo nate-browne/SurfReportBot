@@ -12,9 +12,9 @@
 import requests
 import json
 from time import localtime, strftime
-import os
+from os.path import expanduser
 
-class surf_bot:
+class surf_bot(object):
 
     # Class variables
 
@@ -39,7 +39,7 @@ class surf_bot:
     def __init__(self, apistr, debug):
 
         # get the secret key
-        with open(os.path.expanduser("~/.secret"), 'r') as inputfile:
+        with open(expanduser("~/.secret"), 'r') as inputfile:
 
             # Read in the API key
             temp = inputfile.readline()
