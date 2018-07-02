@@ -42,10 +42,7 @@ class surf_bot(object):
         with open(expanduser("~/.secret"), 'r') as inputfile:
 
             # Read in the API key
-            temp = inputfile.readline()
-
-            # Remove the newline char
-            self.api_key = temp[:-1]
+            self.api_key = inputfile.readline().strip()
 
         # Set the url for getting the info
         self.apistr = apistr
