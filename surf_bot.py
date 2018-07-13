@@ -15,6 +15,11 @@ from time import localtime, strftime
 from os.path import expanduser
 
 class surf_bot(object):
+    '''This class sets up the surf bot object.
+    A surf_bot is comprised of spot IDs, an api key,
+    and various functions used to grab the JSON, parse the JSON,
+    and print out results to the user
+    '''
 
     # Class variables
 
@@ -31,12 +36,8 @@ class surf_bot(object):
     chrt_time = "Time of chart: %s"
     time_str = "%a %d %b %Y at %H:%M:%S"
 
-    """
-    Constructor. Gets the api key and sets the url for usage
-    param: apistr - api call string passed in to use
-    param: debug - debug boolean for diagnostic purposes
-    """
     def __init__(self, apistr, debug):
+        """Constructor. Gets the api key and sets the url for usage"""
 
         # get the secret key
         with open(expanduser("~/.secret"), 'r') as inputfile:
@@ -48,11 +49,8 @@ class surf_bot(object):
         self.apistr = apistr
         self.debug = debug
 
-    """
-    Grabs the raw JSON data for parsing
-    return: the JSON data parsed for la jolla and newport beach as two lists
-    """
     def grab_data(self):
+        """Grabs the raw JSON data for parsing"""
 
         # Fill in corresponding api call strings
         lajolla_str = self.apistr % (self.api_key, surf_bot.la_jolla)
@@ -63,12 +61,12 @@ class surf_bot(object):
         rq2 = requests.get(newport_str)
 
         # Print status codes
-        if self.debug == True:
+        if self.debug:
 
             print "error codes: %d, %d" % (rq1.status_code, rq2.status_code)
 
         # Save good response code, for readability
-        good = requests.codes.ok
+        good = requests.codes['ok']
 
         # Handle error codes
         if rq1.status_code != good or rq2.status_code != good:
@@ -83,11 +81,10 @@ class surf_bot(object):
         # Return the lists of JSON data for parsing
         return lajolla_data, newport_data
 
-    """
-    Extracts the rating information and prints it out to the screen
-    param: data - JSON surf data to parse
-    """
     def get_rating(self, data):
+        """Extracts the rating information and prints it out to the screen
+        param: data - JSON surf data to parse
+        """
 
         # Get the three valid kinds of ratings
         solid_rating = data['solidRating']
@@ -98,11 +95,8 @@ class surf_bot(object):
         print surf_bot.rating % (solid_rating, faded_rating, avg_rating)
         print
 
-    """
-    Extracts the swell information and prints it out to the screen
-    param: data - JSON surf data to parse
-    """
     def get_swell(self, data):
+        """Extracts the swell information and prints it out to the screen"""
 
         # Grab the wave heights and direction of main swell component
         min_height = data['swell']['minBreakingHeight']
@@ -122,11 +116,8 @@ class surf_bot(object):
         print surf_bot.comp1 % (prim_dir, prim_per)
         print surf_bot.comp2 % (sec_dir, sec_per)
 
-    """
-    Extracts the wind information and prints it out to the screen
-    params: data - JSON surf data to parse
-    """
     def get_wind(self, data):
+        """Extracts the wind information and prints it out to the screen"""
 
         # Grab wind speed and direction (both compass and degrees)
         spd = data['wind']['speed']
@@ -137,12 +128,8 @@ class surf_bot(object):
         print surf_bot.wind % (spd, drc, comp)
         print
 
-    """
-    Calls helper functions to print the relevant data from the JSON.
-    param: data1 - JSON object to parse
-    param: data2 - JSON object to parse
-    """
     def print_results(self, data1, data2):
+        """Calls helper functions to print the relevant data from the JSON."""
 
         print
         print "*" * 55

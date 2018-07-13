@@ -10,7 +10,6 @@
 
 # Imports
 import surf_bot as sb
-import pprint
 from datetime import datetime, timedelta
 from time import ctime
 from sys import argv, exit
@@ -26,7 +25,6 @@ def main():
     # Enable debug mode
     if len(argv) > 1 and argv[1] == '-x':
 
-        pp = pprint.PrettyPrinter(indent=1)
         debug = True
 
     # Create a surf bot object
